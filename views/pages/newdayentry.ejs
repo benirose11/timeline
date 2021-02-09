@@ -1,0 +1,44 @@
+<% layout('layouts/boilerplate')%>
+<%console.log(datetoadd)%>
+
+<h1 class="text-center">New Timeline Entry</h1>
+<div class="col-8 offset-2"></div>
+<form action="/addtotimeline" method="POST" enctype="multipart/form-data">
+  <div class="mb-3">
+    <div class="row">
+      <div class="mb-3 col-6">
+    <label class="form-label" for="title">Entry Title</label>
+    <input class="form-control" type="text" id="title" name="title" required>
+      </div>
+      <div class="mb-3 col-6">
+        <label class="form-label" for="image">Add Images</label>
+            <div class="input-group mb-3">
+                
+                <input type="file" class="form-control" name="image" id="image" aria-describedby="inputGroupFileAddon04" aria-label="Upload" multiple>
+                
+              </div>
+      </div>
+    </div>
+    
+    <div class="mb-3">
+      <label for="body" class="form-label">Text Entry</label>
+      <textarea class="form-control" id="body" name="body" rows="4" ></textarea>
+    </div>
+
+
+<div class="row"> 
+    <div class="mb-3 col-4">
+      <label for="tldate" class="form-label">Date on Timeline</label>
+      <input type="date" name="tldate" id="tldate" required value="<%=datetoadd%>">
+
+    </div>
+    <div class="mb-3 col-4">
+      <label for="entrydate" class="form-label">Entry Date</label>
+      <input type="date" name="entrydate" required value="<%=day%>" id="entrydate">
+
+    </div>
+    <div class="mb-3 col-4">
+      <button>Add New Entry</button>
+    </div>
+  </div>  
+</form>

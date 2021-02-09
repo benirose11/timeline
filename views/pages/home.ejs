@@ -1,0 +1,139 @@
+<% layout('layouts/boilerplate')%>
+<h1>Your Timeline</h1>   
+ 
+      <%  for(let date of tldates){ %>
+        
+        <div class="d-flex flex-column bd-highlight mb-3 border border-4 border-info rounded">
+          <div class="p-2 bd-highlight ">
+            <div class="d-flex flex-row bd-highlight ">
+            
+            
+            
+            <div class="p-2 bd-highlight"><h1><%= date.displaydate %></h1></div>
+            <div class="p-2 bd-highlight">
+              <form action="/date/delete/<%=date._id%>" method="POST">
+              <button class="btn btn-danger">Delete Date</button></form></div>
+            <div class="p-2 bd-highlight">
+            <form action="/entry/new/<%=date.date%>" method="GET">
+            <button class="btn btn-success">Add New Entry for <%= date.displaydate %></button></form></div>
+          </div>
+          </div>
+                <div class="p-2 bd-highlight ">
+            <div class="d-flex flex-row bd-highlight">
+              <% date.entries.forEach((entries, c) => { %>
+                <%if(entries.images[0]){%> 
+                  <div class="p-2 bd-highlight">
+                  <div class="card mb-3" style="width: 24rem;">
+                    <div class="row g-0">
+                      <div class="col-md-6">
+                        <div id="EntryCarouselImage<%=c%>" class="carousel slide" data-bs-ride="carousel">
+                          <div class="carousel-inner">
+                              <% entries.images.forEach((image, i) => { %> 
+                                  <div class="carousel-item <%= i === 0 ? "active" :"" %>">
+                                      <img src="<%=image.url%>" class="d-block w-100" alt="...">
+                                    </div>
+                                  <% }) %> 
+                          </div>
+                          <% if(entries.images.length > 1){ %> 
+                          <a class="carousel-control-prev" href="#EntryCarouselImage<%=c%>" role="button" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                          </a>
+                          <a class="carousel-control-next" href="#EntryCarouselImage<%=c%>" role="button" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                          </a>
+                          <% } %> 
+                        </div>  
+                      </div>
+                      <div class="col-md-6">
+                        <div class="card-body">
+                          <h5 class="card-title"><%= entries.title%></h5>
+                          <h6 class="card-subtitle mb-2 text-muted">Entered on: <%= entries.displayentrydate%></h6>
+                          <p class="card-text"><%= entries.body%></p>
+                          <div class="p-2 bd-highlight"><form action="/entry/edit/<%=entries._id%>" method="GET"><button class="btn btn-warning">Edit This Entry</button></form></div>
+                          <div class="p-2 bd-highlight"><form action="/entry/delete/<%=entries._id%>" method="GET"><button class="btn btn-danger">Delete Entry</button></form></div>
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                  <% } else { %> 
+
+                    <div class="p-2 bd-highlight">
+                      <div class="card" style="width: 16rem;">
+                        
+                       
+                        <div class="card-body">
+                          <h5 class="card-title"><%= entries.title%></h5>
+                          <h6 class="card-subtitle mb-2 text-muted">Entered on: <%= entries.displayentrydate%></h6>
+                          <p class="card-text"><%= entries.body%></p>
+                          <div class="p-2 bd-highlight"><form action="/entry/edit/<%=entries._id%>" method="GET"><button class="btn btn-warning">Edit This Entry</button></form></div>
+                          <div class="p-2 bd-highlight"><form action="/entry/delete/<%=entries._id%>" method="GET"><button class="btn btn-danger">Delete Entry</button></form></div>
+                          
+                          
+                        
+                        </div>
+                      </div>
+                    </div>
+
+                    <% } %> 
+             <% })%>
+        </div>
+      </div>
+        </div>
+ <% }%>
+            
+         
+
+
+  <h1>all posts</h1>
+  <div class="d-flex p-2 bd-highlight">
+    <div class="d-flex flex-row-reverse bd-highlight">
+      <%  for(let date of tldates){ %>
+        <%  for(let entries of date.entries){ %>
+         
+    <div class="p-2 bd-highlight">
+      <div class="card" style="width: 18rem;">
+        <%if(entries.images[0]){%> 
+        
+          <div id="EntryCarouselImage" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <% entries.images.forEach((image, i) => { %> 
+                    <div class="carousel-item <%= i === 0 ? "active" :"" %>">
+                        <img src="<%=image.url%>" class="d-block w-100" alt="...">
+                      </div>
+                    <% }) %> 
+            </div>
+            <% if(entries.images.length > 1){ %> 
+            <a class="carousel-control-prev" href="#EntryCarouselImage" role="button" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#EntryCarouselImage" role="button" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </a>
+            <% } %> 
+          </div>  
+        <% } %> 
+        <div class="card-body">
+          <h5 class="card-title"><%= entries.title%></h5>
+          <h6 class="card-subtitle mb-2 text-muted">Entered on:<%= entries.entrydate%></h6>
+          <p class="card-text"><%= entries.body%></p>
+          <a href="/entry/delete/<%=entries._id%>" method="POST" class="card-link">Delete Entry</a>
+          <form action="/entry/edit/<%=entries._id%>" method="GET"><button>Edit This Entry</button></form>
+        
+        </div>
+      </div>
+    </div>
+ <% }%><% }%>
+</div>
+</div>
+
+
+
+
