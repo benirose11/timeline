@@ -157,7 +157,11 @@ app.use((err, req, res, next) => {
 })
 
 // opens a port for incoming data and confirms port is open in the console. 
-app.listen(3000, () => {console.log('Serving on port 3000')})
+const port = process.env.PORT || 3000
+
+app.listen(port, () => {
+    console.log(`Serving timeline on port ${port}`)
+})
 
 
 // database management functions
