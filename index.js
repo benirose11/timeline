@@ -127,7 +127,7 @@ app.get('/entry/new/:id', isLoggedIn, render.specdatenewentry)
 
 app.get('/entry/edit/:id', isLoggedIn, render.edit)
 
-app.get('*', render.splashpage)
+
 
 
 // // ACTION ROUTES
@@ -147,6 +147,8 @@ app.get('/entry/delete/:id', isLoggedIn, action.deleteEntry)
 app.post('/date/delete/:id', isLoggedIn, action.deleteDate)
 
 app.post('/addtotimeline', isLoggedIn, upload.array('image'), action.new)
+
+app.get('*', render.splashpage)
 
 app.all('*', (req, res, next) => {
     next(new ExpressError('Page Not Found', 404))

@@ -8,7 +8,7 @@ const {storage, cloudinary} = require('../cloudinary')
 module.exports.logout = (req, res) => {
     req.logout();
     req.flash('success', 'Logged out')
-    res.redirect('/home')}
+    res.redirect('/splashpage')}
 
 module.exports.register = async (req, res, next)=>{
     try {
