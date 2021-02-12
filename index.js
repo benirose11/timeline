@@ -127,6 +127,8 @@ app.get('/entry/new/:id', isLoggedIn, render.specdatenewentry)
 
 app.get('/entry/edit/:id', isLoggedIn, render.edit)
 
+app.get('/testpage', render.testpage)
+
 
 
 

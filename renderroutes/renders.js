@@ -35,3 +35,6 @@ module.exports.specdatenewentry = async (req, res, next) => {
 module.exports.edit = async (req, res, next) => {
     const entry = await tlEntry.findById(req.params.id).populate("_id, tldate");
     res.render('./pages/editentry', {entry})}
+
+module.exports.testpage = (req, res) => {
+        res.render('./pages/testpage')}

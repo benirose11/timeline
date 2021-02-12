@@ -1,8 +1,7 @@
 const User = require('../models/user');
 const tlEntry = require('../models/tlentry');
 const tlDate = require('../models/date');
-const multer  = require('multer');
-const {storage, cloudinary} = require('../cloudinary')
+const {cloudinary} = require('../cloudinary')
 
 
 module.exports.logout = (req, res) => {
@@ -27,7 +26,7 @@ module.exports.register = async (req, res, next)=>{
         }}
 
 module.exports.login = (req, res)=>{
-    req.flash('success', 'Logged in');
+    // req.flash('success', 'Logged in');
     const targeturl = req.session.returnto || '/home';
     delete req.session.returnto;        
     res.redirect(targeturl)}
